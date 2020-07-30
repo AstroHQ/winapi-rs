@@ -621,8 +621,22 @@ interface IDispatch(IDispatchVtbl): IUnknown(IUnknownVtbl) {
 }}
 // IDispatch_RemoteInvoke_Proxy
 // IDispatch_RemoteInvoke_Stub
-// LPENUMVARIANT
-// IEnumVARIANT
+pub type LPENUMVARIANT = *mut IEnumVARIANT;
+RIDL!{#[uuid(0x00020404, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
+interface IEnumVARIANT(IEnumVARIANTVtbl): IUnknown(IUnknownVtbl) {
+    fn Next(
+        celt: ULONG,
+        rgVar: *mut VARIANT,
+        pCeltFetched: *mut ULONG,
+    ) -> HRESULT,
+    fn Skip(
+        celt: ULONG,
+    ) -> HRESULT,
+    fn Reset() -> HRESULT,
+    fn Clone(
+        ppEnum: *mut *mut IEnumVARIANT,
+    ) -> HRESULT,
+}}
 // IEnumVARIANT_RemoteNext_Proxy
 // IEnumVARIANT_RemoteNext_Stub
 RIDL!{#[uuid(0x0000002F, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46)]
